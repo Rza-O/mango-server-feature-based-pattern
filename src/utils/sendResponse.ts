@@ -1,0 +1,20 @@
+// success
+// statusCode
+// data
+
+import { Response } from "express";
+
+interface TResponse<T> {
+	success: boolean;
+	statusCode: number;
+	message: string;
+	data: T;
+}
+
+export const sendResponse = <T>(res: Response, data: TResponse<T>) => {
+	res.status(data.statusCode).json({
+		status: data.success,
+		message: data.message,
+		data: data.data,
+	});
+};
